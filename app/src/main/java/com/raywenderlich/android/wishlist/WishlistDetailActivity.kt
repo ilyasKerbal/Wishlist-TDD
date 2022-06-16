@@ -62,9 +62,9 @@ class WishlistDetailActivity : AppCompatActivity() {
     setContentView(binding.root)
     binding.recyclerWishes.layoutManager = LinearLayoutManager(this)
     binding.recyclerWishes.adapter = wishlistAdapter
-    viewModel.getWishlist(intent.getIntExtra(EXTRA_WISHLIST, 0)).observe(this, {
+    viewModel.getWishlist(intent.getIntExtra(EXTRA_WISHLIST, 0)).observe(this) {
       render(it)
-    })
+    }
   }
 
   private fun render(wishlist: Wishlist) {
