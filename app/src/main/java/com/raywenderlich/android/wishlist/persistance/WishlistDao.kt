@@ -33,14 +33,22 @@ package com.raywenderlich.android.wishlist.persistance
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.raywenderlich.android.wishlist.Wishlist
 
+@Dao
 interface WishlistDao {
 
+  @Query("Select * from wishlist")
   fun getAll(): LiveData<List<Wishlist>>
 
+  @Query("Select * from wishlist where id=:id")
   fun findById(id: Int): LiveData<Wishlist>
 
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun save(vararg wishlist: Wishlist)
 }
 

@@ -41,6 +41,9 @@ object StringListConverter {
 
     @TypeConverter
     @JvmStatic
-    fun stringToStringList(string: String?): MutableList<String>? =
-        string?.split("|")?.toMutableList()
+    fun stringToStringList(string: String?): MutableList<String>? = if(!string.isNullOrBlank()) {
+        string.split("|").toMutableList()
+    }else {
+        mutableListOf()
+    }
   }
